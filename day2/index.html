@@ -8,7 +8,7 @@
     <div id="top">
       <div class="digital_clock"></div>
     </div>
-    <div id="bottom">
+    <div id="middle">
       <div class="analogue_clock">
         <div class="clock-face">
           <div class="hand hour-hand"></div>
@@ -16,6 +16,10 @@
           <div class="hand second-hand"></div>
         </div>
       </div>
+    </div>
+    <div>
+    <div id="bottom">
+      <div class="hexa_clock"></div>
     </div>
   <style>
     html {
@@ -27,15 +31,20 @@
     body {
       font-size: 2rem;
       display:block;
-      flex:1;
       min-height: 100vh;
       align-items: center;
+      color: white;
     }
 
     #top {
       width: 100%;
     }
-     #bottom {
+
+    #middle {
+      width: 100%;
+    }
+
+    #bottom {
       width: 100%;
     }
 
@@ -64,6 +73,17 @@
         inset 0 0 0 3px #EFEFEF,
         inset 0 0 10px black,
         0 0 10px rgba(0,0,0,0.2);
+    }
+
+    .hexa_clock {
+      margin-top: 5rem;
+      margin-left: auto;
+      margin-right: auto;
+      padding-top: 2.5rem;
+      width: 15rem;
+      height: 10rem;
+      border: 2px solid #EEE;
+      position: relative;
     }
 
     .clock-face {
@@ -103,6 +123,7 @@
   const minHand = window.document.querySelector('.min-hand')
   const hourHand = window.document.querySelector('.hour-hand')
   const digital = window.document.getElementsByClassName('digital_clock')[0]
+  const hexa = window.document.getElementsByClassName('hexa_clock')[0]
 
   function tickTock() {
     const now =  new Date();
@@ -118,8 +139,11 @@
     const display_seconds = format(seconds);
     const display_minutes = format(minutes);
     const display_hours = format(hours);
-
     digital.innerText = `${display_hours}:${display_minutes}:${display_seconds}`;
+    const colour = "#" + display_hours + display_minutes + display_seconds;
+    document.body.style.backgroundColor = colour;
+    hexa.innerText = `background\n colour is\n ${colour}`;
+    
   }
 
   function format(number_string){
