@@ -1,21 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">  
 <head>
   <meta charset="UTF-8">
   <title>Type Ahead 👀</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <form class="search-form">
     <input type="text" class="search" placeholder="City or State">
-    <ul class="suggestions">
-      <li>Filter for a city</li>
-      <li>or a state</li>
-    </ul>
+      <ul class="suggestions">
+        <li>Filter for a city</li>
+        <li>or a state</li>
+      </ul>
   </form>
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+const cities = [];
+fetch(endpoint)
+  .then( data => data.json())
+  .then( data => cities.push(...data)); 
+
+const input_field = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+function findMatches(word_to_match, list){
+  return list.filter( city => {
+    var regex = new RegExp(word_to_match, "gi");
+    return city.city.match(regex) || city.state.match(regex);
+  })
+}
+
+function displayMatches(){
+  const match = this.value;
+  const matches = findMatches(match, cities);
+  const list_items = matches.map(function(city){
+      const regex = new RegExp(match, 'gi')
+      console.log(`this value is ${match}`);
+      const city_name = city.city.replace(regex, `<span class="hl">${match}</span>`);
+      const state_name = city.state.replace(regex, `<span class="hl">${match}</span>`);
+      return
+      `<li><span>${city_name}, ${state_name}</span><span class="population">${city.population}</span></li>`;
+      }
+    );
+  suggestions.innerHTML = list_items.join('');
+}
+
+input_field.addEventListener('change', displayMatches);
+input_field.addEventListener('keyup', displayMatches);
 
 </script>
   </body>
