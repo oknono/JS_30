@@ -17,12 +17,13 @@
         ctx.lineJoin = 'round';
         ctx.lineCap = 'round';
         ctx.lineWidth = 10;
+        ctx.globalCompositeOperation = 'multiply';
 
         let drawing = false;
-
+        let hue = 0;
         let lastX = 0;
         let lastY = 0;
-        let hue = 0;
+        let direction = true
 
         function draw(e){
             if(!drawing) return;
@@ -36,6 +37,10 @@
             if (hue >= 360){
                 hue = 0;
             }
+            if (ctx.lineWidth > 50 || ctx.lineWidth <= 1){
+                direction = !direction;
+            }
+            direction ? ctx.lineWidth++ : ctx.lineWidth--;
         }
 
         function clearScreen(){
