@@ -19,27 +19,66 @@
 
     // Regular
 
+    console.log("some regular message");
+
     // Interpolated
+
+    console.log("Message with %s", "interpolation");
 
     // Styled
 
+    console.log("%c Style message", "font-size:42px; color:red; background-color:black");
+
     // warning!
+
+    console.warn("This us a warning");
 
     // Error :|
 
-    // Info
+     console.error("This us an error :|");
+
+    //n Info
+
+    console.info("This is some useless information ¯\\_(ツ)_/¯");
 
     // Testing
 
+    console.assert(1 == 2 , "The moon is made of cheese");
+
     // clearing
 
+    //console.clear();
+
     // Viewing DOM Elements
+    let p = document.querySelector('p');
+
+    console.dir(p);
 
     // Grouping together
+    dogs.forEach( dog => {
+      console.groupCollapsed(`${dog.name}`);
+      console.log(`${dog.name}`);
+      console.log(`${dog.age}`);
+      console.groupEnd(`${dog.name}`);
+    });
 
     // counting
 
+    console.count('thing');
+    console.count('thing');
+    console.count('thing');
+    console.count('thing');
+    console.count('thing');
+
     // timing
+
+    console.time('fetch data');
+    fetch('https://api.github.com/users/oknono')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetch data');
+        console.log(data);
+      })
 
   </script>
 </body>
