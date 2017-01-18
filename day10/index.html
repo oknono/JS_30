@@ -104,6 +104,17 @@
   </div>
 
 <script>
+  const items  = document.querySelectorAll('.inbox input[type="checkbox"]');
+  let lastChecked;
+
+  items.forEach( checkbox => checkbox.addEventListener('click', handleCLick));
+
+  function handleCLick(e){
+    if (e.shiftKey){
+      console.log(e);
+     lastChecked = this;
+    }
+  };
 </script>
 </body>
 </html>
