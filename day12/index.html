@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Key Detection</title>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+<body>
+<script>
+	const secretSeq = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight","ArrowLeft", "ArrowRight", "b", "a"];
+	const keySeq = [];
+	const maxLength = secretSeq.length;
+    window.addEventListener('keyup', (e) => {
+   	keySeq.push(e.key);
+	keySeq.splice(-maxLength - 1, keySeq.length - maxLength);
+	if (secretSeq.join('') === keySeq.join('')){
+		console.log('Secret Unlocked');
+		cornify_add();
+	}
+   	  })
+</script>
+</body>
+</html>
